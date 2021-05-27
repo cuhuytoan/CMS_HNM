@@ -7,12 +7,12 @@
             <div class="profile-image">
 
                 <a href="javascript:void(0);" class="dropdown-toggle u-dropdown text-blue" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
-                    <img src="/data/user/mainimages/small/@(String.IsNullOrEmpty(@globalModel.avatar) ? "noimages.png" : globalModel.avatar)" alt="user-img" class="img-circle">
+                    <img src="/data/user/mainimages/small/noimages.png" : globalModel.avatar)" alt="user-img" class="img-circle">
                     
                 </a>
                 <ul class="dropdown-menu animated flipInY">
-                    <li><a href="/Admin/Account/EditProfile"><i class="fa fa-user"></i> Thông tin cá nhân</a></li>
-                    <li><a href="/Admin/Account/ChangePassword"><i class="fa fa-key"></i> Đổi mật khẩu</a></li>
+                    <li><a href="javascript:void(0);"><i class="fa fa-user"></i> Thông tin cá nhân</a></li>
+                    <li><a href="javascript:void(0);"><i class="fa fa-key"></i> Đổi mật khẩu</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="/Identity/Account/Logout"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
                 </ul>
@@ -22,39 +22,18 @@
     </div>
     <nav class="sidebar-nav">
         <ul id="side-menu">
-            <AuthorizeView Roles="Cộng tác viên,Quản trị hệ thống,Lãnh đạo tòa soạn,Thư ký tòa soạn,Phụ trách chuyên mục">
+          
                 <li class="active">
-                    <a class="waves-effect" href="javascript:void(0);" aria-expanded="true"><i class="icon-screen-desktop fa-fw"></i> <span class="hide-menu"> Quản lý bài viết </span></a>
+                    <a class="waves-effect" href="javascript:void(0);" aria-expanded="true"><i class="icon-screen-desktop fa-fw"></i> <span class="hide-menu"> Quản lý quảng cáo </span></a>
                     <ul aria-expanded="true" class="collapse">
-                        <li> <a href="/Admin/Article/Edit">Thêm mới bài viết</a> </li>
-                        <li> <a href="/Admin/Article">Tất cả bài viết</a> </li>
-                        <li> <a href="/Admin/Article?p=1&articleCategoryId=&keyword=&articleStatusId=1">Bài viết mới gửi</a> </li>
-                        <li> <a href="/Admin/Article?p=1&articleCategoryId=&keyword=&articleStatusId=2">Bài viết đã kiểm tra</a> </li>
-                        <li> <a href="/Admin/Article?p=1&articleCategoryId=&keyword=&articleStatusId=3">Bài viết yêu cầu chỉnh sửa</a> </li>
-                        <li> <a href="/Admin/Article?p=1&articleCategoryId=&keyword=&articleStatusId=4">Bài viết đã duyệt</a> </li>
+                        <li> <a href="/Admin/Advertising/Edit">Thêm mới quảng cáo</a> </li>
+                        <li> <a href="/Admin/Advertising">Danh sách quảng cáo</a> </li>              
                     </ul>
                 </li>
-            </AuthorizeView>
-
-            <AuthorizeView Roles="Cộng tác viên,Quản trị hệ thống,Lãnh đạo tòa soạn,Thư ký tòa soạn">
-                <li class="active">
-                    <a class="waves-effect" href="javascript:void(0);" aria-expanded="true"><i class="icon-people fa-fw"></i> <span class="hide-menu"> Quản lý thành viên </span></a>
-                    <ul aria-expanded="true" class="collapse">
-                        <li> <a href="/Admin/Account/Edit">Thêm mới thành viên</a> </li>
-                        <li> <a href="/Admin/Account/Index">Danh sách thành viên</a> </li>
-                    </ul>
-                </li>
-                <li class="active">
-                    <a class="waves-effect" href="/Admin/Settings/Edit" aria-expanded="true"><i class="icon-settings fa-fw"></i> <span class="hide-menu"> Cấu hình hệ thống </span></a>
-                </li>
-            </AuthorizeView>
-              
+            
             <li class="active">
                 <a class="waves-effect" href="javascript:void(0);" aria-expanded="true"><i class="icon-user fa-fw"></i> <span class="hide-menu"> Quản lý tài khoản </span></a>
-                <ul aria-expanded="true" class="collapse">
-                    <li><a href="/Admin/Account/EditProfile"><i class="fa fa-user"></i> Thông tin cá nhân</a></li>
-                    <li><a href="/Admin/Account/ChangePassword"><i class="fa fa-key"></i> Đổi mật khẩu</a></li>
-                    <li role="separator" class="divider"></li>
+                <ul aria-expanded="true" class="collapse">                  
                     <li><a href="/Identity/Account/Logout"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
                 </ul>
             </li>

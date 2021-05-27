@@ -1,6 +1,5 @@
 using Blazored.Toast;
 using CMS.Website.Areas.Identity;
-using CMS.Website.NotiHub;
 using CMS.Website.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -109,8 +108,7 @@ namespace CMS.Website
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapBlazorHub();
-                endpoints.MapHub<NotificationHubs>("/notificationHubs");
+                endpoints.MapBlazorHub();                
                 endpoints.MapFallbackToPage("/_Host");                
                 endpoints.MapFallbackToAreaPage("/Admin/{*clientroutes:nonfile}", "/_HostAdmin", "Admin");
 

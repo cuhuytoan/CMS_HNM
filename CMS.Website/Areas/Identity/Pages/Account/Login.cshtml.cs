@@ -39,8 +39,8 @@ namespace CMS.Website.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required(ErrorMessage = "Vui lòng nhập Email")]
-            [EmailAddress(ErrorMessage = "Email không hợp lệ")]
+            [Required(ErrorMessage = "Vui lòng nhập tài khoản")]
+            //[EmailAddress(ErrorMessage = "Email không hợp lệ")]
             public string Email { get; set; }
 
             [Required(ErrorMessage = "Mật khẩu không hợp lệ")]
@@ -70,7 +70,7 @@ namespace CMS.Website.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = "/Admin/Article";
+            returnUrl = "/Admin/Advertising";
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 

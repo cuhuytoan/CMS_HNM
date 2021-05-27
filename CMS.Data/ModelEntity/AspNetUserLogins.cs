@@ -17,10 +17,11 @@ namespace CMS.Data.ModelEntity
         [Key]
         [StringLength(128)]
         public string ProviderKey { get; set; }
-        public string ProviderDisplayName { get; set; }
-        [Required]
-        [StringLength(450)]
+        [Key]
+        [StringLength(128)]
         public string UserId { get; set; }
+        [StringLength(255)]
+        public string ProviderDisplayName { get; set; }
 
         [ForeignKey(nameof(UserId))]
         [InverseProperty(nameof(AspNetUsers.AspNetUserLogins))]

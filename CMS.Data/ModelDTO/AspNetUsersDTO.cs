@@ -100,7 +100,6 @@ namespace CMS.Data.ModelDTO
         public AspNetUsersDTO AspNetUsers { get; set; } = new();
         public AspNetUserProfilesDTO AspNetUserProfiles { get; set; } = new();
         public AspNetUserRolesDTO AspNetUserRoles { get; set; } = new();
-        public List<ArticleCategoryAssign> LstArtCatAssign { get; set; } = new();
     }
 
     public class AspNetUserInfo

@@ -14,7 +14,7 @@ namespace CMS.Data.ModelEntity
         [Key]
         public int Id { get; set; }
         [Required]
-        [StringLength(450)]
+        [StringLength(128)]
         public string UserId { get; set; }
         public string ClaimType { get; set; }
         public string ClaimValue { get; set; }

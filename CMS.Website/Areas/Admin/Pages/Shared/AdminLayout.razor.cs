@@ -33,31 +33,7 @@ namespace CMS.Website.Areas.Admin.Pages.Shared
             var authState = await authenticationStateTask;
             globalModel.user = authState.User;
             globalModel.userId = globalModel.user.FindFirstValue(ClaimTypes.NameIdentifier);
-            hubConnection = new HubConnectionBuilder()
-              .WithUrl(NavigationManager.ToAbsoluteUri("/notificationHubs"), options =>
-              {
-                  options.Headers.Add("USERID", globalModel.userId);
-              })
-              .WithAutomaticReconnect()
-              .Build();
-            await hubConnection.StartAsync();
-            hubConnection.On<string, string, string, string, string>("ReceiveMessage", (toUserId, subject, content, url, imageUrl) =>
-            {
-                //ToastMessage
-                if (globalModel.userId == toUserId)
-                {
-                    toastService.ShowToast(ToastLevel.Info, $"{subject}", "Bạn có thông báo mới");
-                    globalModel.lstUserNoti.Insert(0, new SpUserNotifySearchResult
-                    {
-                        Subject = subject,
-                        Content = content,
-                        URL = url,
-                        CreateDate = DateTime.Now
-                    });
-                    globalModel.totalUnread += 1;
-                    StateHasChanged();
-                }
-            });
+
 
             await InitData();
         }
@@ -69,9 +45,7 @@ namespace CMS.Website.Areas.Admin.Pages.Shared
             {
                 globalModel.avatar = profiles.AvatarUrl;
             }
-            var result = await Repository.UserNoti.GetAllNoti(null, globalModel.userId, null, 3, 1);
-            globalModel.lstUserNoti = result.Items;
-            globalModel.totalUnread = result.TotalSize;
+
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)

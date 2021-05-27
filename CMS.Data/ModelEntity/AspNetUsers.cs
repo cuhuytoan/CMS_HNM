@@ -15,38 +15,41 @@ namespace CMS.Data.ModelEntity
         {
             AspNetUserClaims = new HashSet<AspNetUserClaims>();
             AspNetUserLogins = new HashSet<AspNetUserLogins>();
-            AspNetUserRoles = new HashSet<AspNetUserRoles>();
-            AspNetUserTokens = new HashSet<AspNetUserTokens>();
         }
 
         [Key]
+        [StringLength(128)]
         public string Id { get; set; }
         [StringLength(256)]
-        public string UserName { get; set; }
-        [StringLength(256)]
-        public string NormalizedUserName { get; set; }
-        [StringLength(256)]
         public string Email { get; set; }
-        [StringLength(256)]
-        public string NormalizedEmail { get; set; }
         public bool EmailConfirmed { get; set; }
         public string PasswordHash { get; set; }
         public string SecurityStamp { get; set; }
-        public string ConcurrencyStamp { get; set; }
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmed { get; set; }
         public bool TwoFactorEnabled { get; set; }
-        public DateTimeOffset? LockoutEnd { get; set; }
+        [Column(TypeName = "datetime")]
+        public DateTime? LockoutEndDateUtc { get; set; }
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
+        [Required]
+        [StringLength(256)]
+        public string UserName { get; set; }
+        public bool? IsEnabled { get; set; }
+        [StringLength(500)]
+        public string AccountCode { get; set; }
+        [StringLength(255)]
+        public string ConcurrencyStamp { get; set; }
+        [Column(TypeName = "datetime")]
+        public DateTime? LockoutEnd { get; set; }
+        [StringLength(255)]
+        public string NormalizedEmail { get; set; }
+        [StringLength(255)]
+        public string NormalizedUserName { get; set; }
 
         [InverseProperty("User")]
         public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<AspNetUserTokens> AspNetUserTokens { get; set; }
     }
 }

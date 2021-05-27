@@ -12,17 +12,14 @@ namespace CMS.Data.ModelEntity
     public partial class AspNetUserTokens
     {
         [Key]
+        [StringLength(128)]
         public string UserId { get; set; }
         [Key]
         [StringLength(128)]
         public string LoginProvider { get; set; }
         [Key]
-        [StringLength(128)]
+        [StringLength(190)]
         public string Name { get; set; }
         public string Value { get; set; }
-
-        [ForeignKey(nameof(UserId))]
-        [InverseProperty(nameof(AspNetUsers.AspNetUserTokens))]
-        public virtual AspNetUsers User { get; set; }
     }
 }

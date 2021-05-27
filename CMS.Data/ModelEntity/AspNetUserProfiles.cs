@@ -15,6 +15,9 @@ namespace CMS.Data.ModelEntity
         public int Id { get; set; }
         [StringLength(128)]
         public string UserId { get; set; }
+        /// <summary>
+        /// 1 là email, 2 là sdt
+        /// </summary>
         [StringLength(50)]
         public string RegType { get; set; }
         [Column(TypeName = "datetime")]
@@ -23,52 +26,52 @@ namespace CMS.Data.ModelEntity
         [Column(TypeName = "datetime")]
         public DateTime? VerifiedDate { get; set; }
         [Column(TypeName = "datetime")]
-        public DateTime? LastLoginDate { get; set; }
-        [Column(TypeName = "datetime")]
         public DateTime? LastActivityDate { get; set; }
         [StringLength(250)]
         public string FullName { get; set; }
+        /// <summary>
+        /// true là nam, false là nữ
+        /// </summary>
         public bool? Gender { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? BirthDate { get; set; }
         [StringLength(250)]
         public string Company { get; set; }
+        [Column("ProductBrand_ID")]
         public int? ProductBrandId { get; set; }
-        public int? DepartmentId { get; set; }
         public int? Rank { get; set; }
         [StringLength(250)]
         public string Address { get; set; }
-        public int? CountryId { get; set; }
+        [Column("Location_ID")]
         public int? LocationId { get; set; }
-        public int? DistrictId { get; set; }
-        public int? WardId { get; set; }
         [StringLength(50)]
         public string Phone { get; set; }
         [StringLength(50)]
         public string Email { get; set; }
         [StringLength(250)]
         public string Website { get; set; }
+        [Column("FacebookID")]
         [StringLength(50)]
         public string FacebookId { get; set; }
         [StringLength(250)]
         public string Skype { get; set; }
         [StringLength(250)]
-        public string Zalo { get; set; }
-        [StringLength(250)]
-        public string Telegram { get; set; }
-        [StringLength(250)]
         public string AvatarUrl { get; set; }
         [StringLength(2000)]
         public string Signature { get; set; }
         public int? AccountType { get; set; }
+        public int? CountryId { get; set; }
+        public string ResumeProfilerContent { get; set; }
+        [StringLength(500)]
+        public string WorkPosition { get; set; }
         [StringLength(500)]
         public string Department { get; set; }
-        public bool? AllowNotifyApp { get; set; }
-        public bool? AllowNotifyEmail { get; set; }
-        [Column("AllowNotifySMS")]
-        public bool? AllowNotifySms { get; set; }
         [StringLength(500)]
-        public string BankAcc { get; set; }
-        public int? BankId { get; set; }
+        public string FormOfLabor { get; set; }
+        [StringLength(500)]
+        public string DirectManagement { get; set; }
+        public string Subordinates { get; set; }
+        [StringLength(250)]
+        public string ReferralAccountCode { get; set; }
     }
 }

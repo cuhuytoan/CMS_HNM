@@ -9,11 +9,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CMS.Data.ModelEntity
 {
-    public partial class ArticleRelationArticle
+    public partial class AdvertisingBlockDetail
     {
         [Key]
+        [Column("id")]
         public int Id { get; set; }
-        public int? ArticleId { get; set; }
-        public int? ArticleRelationId { get; set; }
+        public int? AdBlockId { get; set; }
+        [StringLength(500)]
+        public string Name { get; set; }
+        public int? Qty { get; set; }
     }
 }

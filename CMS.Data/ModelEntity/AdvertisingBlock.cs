@@ -11,22 +11,36 @@ namespace CMS.Data.ModelEntity
 {
     public partial class AdvertisingBlock
     {
+        public AdvertisingBlock()
+        {
+            Advertising = new HashSet<Advertising>();
+        }
+
         [Key]
-        public int Id { get; set; }
+        [Column("AdvertisingBlock_ID")]
+        public int AdvertisingBlockId { get; set; }
+        [Column("ArticleCategory_ID")]
         public int? ArticleCategoryId { get; set; }
         public int? Position { get; set; }
         [StringLength(500)]
         public string Name { get; set; }
         public string Description { get; set; }
         public bool? Active { get; set; }
-        [StringLength(450)]
-        public string CreateBy { get; set; }
+        public Guid? CreateBy { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? CreateDate { get; set; }
-        [StringLength(450)]
-        public string LastEditedBy { get; set; }
+        public Guid? LastEditedBy { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? LastEditedDate { get; set; }
         public bool? IsMobile { get; set; }
+        public bool? Lock { get; set; }
+        [Column("JssorSlide_ID")]
+        public int? JssorSlideId { get; set; }
+        public int? TimingSlide { get; set; }
+        [StringLength(500)]
+        public string SizeSuggest { get; set; }
+
+        [InverseProperty("AdvertisingBlock")]
+        public virtual ICollection<Advertising> Advertising { get; set; }
     }
 }

@@ -37,7 +37,7 @@ namespace CMS.Services.Repositories
 
         Task<AspNetUserInfo> GetAccountInfoByUserId(string UserId);
 
-        Task<VirtualizeResponse<SpAccountSearchResult>> GetLstUsersPaging(AccountSearchFilter model);
+        
     }
 
     public class AccountRepository : RepositoryBase<AspNetUsers>, IAccountRepository
@@ -142,14 +142,10 @@ namespace CMS.Services.Repositories
                     existsProfilers.Gender = model.Gender;
                     existsProfilers.Address = model.Address;
                     existsProfilers.AvatarUrl = model.AvatarUrl;
-                    existsProfilers.BankAcc = model.BankAcc;
+                    
                     existsProfilers.Company = model.Company;
                     existsProfilers.CountryId = 1;
-                    existsProfilers.LocationId = model.LocationId;
-                    existsProfilers.DistrictId = model.DistrictId;
-                    existsProfilers.WardId = model.WardId;
-                    existsProfilers.BankId = model.BankId;
-                    existsProfilers.DepartmentId = model.DepartmentId;
+                    existsProfilers.LocationId = model.LocationId;                    
                     await CmsContext.SaveChangesAsync();
                 }
             }
@@ -183,22 +179,6 @@ namespace CMS.Services.Repositories
             return output;
         }
 
-        public async Task<VirtualizeResponse<SpAccountSearchResult>> GetLstUsersPaging(AccountSearchFilter model)
-        {
-            var output = new VirtualizeResponse<SpAccountSearchResult>();
-            var itemCounts = new OutputParameter<int?>();
-            var returnValues = new OutputParameter<int>();
-            var result = await CmsContext.GetProcedures().SpAccountSearchAsync(
-            model.Keyword,
-            model.RoleId,
-            model.Active,
-            model.PageSize,
-            model.CurrentPage, itemCounts, returnValues
-            );
-            output.Items = result.ToList();
-            output.TotalSize = (int)itemCounts.Value;
-
-            return output;
-        }
+        
     }
 }

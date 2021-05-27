@@ -9,8 +9,6 @@ namespace CMS.Data.ModelEntity
 {
     public partial class CmsContext : DbContext
     {
-      
-
         public CmsContext(DbContextOptions<CmsContext> options)
             : base(options)
         {
@@ -18,19 +16,7 @@ namespace CMS.Data.ModelEntity
 
         public virtual DbSet<Advertising> Advertising { get; set; }
         public virtual DbSet<AdvertisingBlock> AdvertisingBlock { get; set; }
-        public virtual DbSet<Article> Article { get; set; }
-        public virtual DbSet<ArticleAttachFile> ArticleAttachFile { get; set; }
-        public virtual DbSet<ArticleBlock> ArticleBlock { get; set; }
-        public virtual DbSet<ArticleBlockArticle> ArticleBlockArticle { get; set; }
-        public virtual DbSet<ArticleCategory> ArticleCategory { get; set; }
-        public virtual DbSet<ArticleCategoryArticle> ArticleCategoryArticle { get; set; }
-        public virtual DbSet<ArticleCategoryAssign> ArticleCategoryAssign { get; set; }
-        public virtual DbSet<ArticleComment> ArticleComment { get; set; }
-        public virtual DbSet<ArticleCommentStaff> ArticleCommentStaff { get; set; }
-        public virtual DbSet<ArticleRelationArticle> ArticleRelationArticle { get; set; }
-        public virtual DbSet<ArticleStatus> ArticleStatus { get; set; }
-        public virtual DbSet<ArticleTop> ArticleTop { get; set; }
-        public virtual DbSet<ArticleType> ArticleType { get; set; }
+        public virtual DbSet<AdvertisingBlockDetail> AdvertisingBlockDetail { get; set; }
         public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
@@ -39,22 +25,7 @@ namespace CMS.Data.ModelEntity
         public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<Bank> Bank { get; set; }
-        public virtual DbSet<Country> Country { get; set; }
-        public virtual DbSet<Department> Department { get; set; }
-        public virtual DbSet<DepartmentMan> DepartmentMan { get; set; }
-        public virtual DbSet<District> District { get; set; }
-        public virtual DbSet<Location> Location { get; set; }
-        public virtual DbSet<ProductBrand> ProductBrand { get; set; }
-        public virtual DbSet<ProductBrandCategory> ProductBrandCategory { get; set; }
-        public virtual DbSet<ProductBrandModelManagement> ProductBrandModelManagement { get; set; }
-        public virtual DbSet<ProductBrandQrcodeCreateType> ProductBrandQrcodeCreateType { get; set; }
-        public virtual DbSet<ProductBrandStatus> ProductBrandStatus { get; set; }
-        public virtual DbSet<ProductBrandType> ProductBrandType { get; set; }
         public virtual DbSet<ReplaceChar> ReplaceChar { get; set; }
-        public virtual DbSet<Setting> Setting { get; set; }
-        public virtual DbSet<UserNotify> UserNotify { get; set; }
-        public virtual DbSet<Ward> Ward { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -63,6 +34,12 @@ namespace CMS.Data.ModelEntity
             modelBuilder.Entity<Advertising>(entity =>
             {
                 entity.Property(e => e.IsCode).HasDefaultValueSql("((0))");
+
+                entity.HasOne(d => d.AdvertisingBlock)
+                    .WithMany(p => p.Advertising)
+                    .HasForeignKey(d => d.AdvertisingBlockId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_Advertising_AdvertisingBlock");
             });
 
             modelBuilder.Entity<AdvertisingBlock>(entity =>
@@ -70,19 +47,39 @@ namespace CMS.Data.ModelEntity
                 entity.Property(e => e.IsMobile).HasDefaultValueSql("((0))");
             });
 
-            modelBuilder.Entity<ArticleStatus>(entity =>
+            modelBuilder.Entity<AspNetRoles>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.ConcurrencyStamp).IsUnicode(false);
+
+                entity.Property(e => e.NormalizedName).IsUnicode(false);
+            });
+
+            modelBuilder.Entity<AspNetUserClaims>(entity =>
+            {
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AspNetUserClaims)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId");
             });
 
             modelBuilder.Entity<AspNetUserLogins>(entity =>
             {
-                entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
+                entity.HasKey(e => new { e.LoginProvider, e.ProviderKey, e.UserId })
+                    .HasName("PK_dbo.AspNetUserLogins");
+
+                entity.Property(e => e.ProviderDisplayName).IsUnicode(false);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AspNetUserLogins)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId");
             });
 
-            modelBuilder.Entity<AspNetUserRoles>(entity =>
+            modelBuilder.Entity<AspNetUserProfiles>(entity =>
             {
-                entity.HasKey(e => new { e.UserId, e.RoleId });
+                entity.Property(e => e.Gender).HasComment("true là nam, false là nữ");
+
+                entity.Property(e => e.RegType).HasComment("1 là email, 2 là sdt");
             });
 
             modelBuilder.Entity<AspNetUserTokens>(entity =>
@@ -90,23 +87,15 @@ namespace CMS.Data.ModelEntity
                 entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
             });
 
-            modelBuilder.Entity<ProductBrand>(entity =>
+            modelBuilder.Entity<AspNetUsers>(entity =>
             {
-                entity.Property(e => e.HasQrcode).HasDefaultValueSql("((0))");
+                entity.Property(e => e.ConcurrencyStamp).IsUnicode(false);
 
-                entity.Property(e => e.SellCount).HasDefaultValueSql("((0))");
+                entity.Property(e => e.IsEnabled).HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.ViewCount).HasDefaultValueSql("((0))");
-            });
+                entity.Property(e => e.NormalizedEmail).IsUnicode(false);
 
-            modelBuilder.Entity<ProductBrandStatus>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
-            modelBuilder.Entity<Setting>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.NormalizedUserName).IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);

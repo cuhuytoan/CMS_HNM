@@ -12,15 +12,12 @@ namespace CMS.Data.ModelEntity
     public partial class AspNetUserRoles
     {
         [Key]
+        public int Id { get; set; }
+        [Required]
+        [StringLength(128)]
         public string UserId { get; set; }
-        [Key]
+        [Required]
+        [StringLength(128)]
         public string RoleId { get; set; }
-
-        [ForeignKey(nameof(RoleId))]
-        [InverseProperty(nameof(AspNetRoles.AspNetUserRoles))]
-        public virtual AspNetRoles Role { get; set; }
-        [ForeignKey(nameof(UserId))]
-        [InverseProperty(nameof(AspNetUsers.AspNetUserRoles))]
-        public virtual AspNetUsers User { get; set; }
     }
 }

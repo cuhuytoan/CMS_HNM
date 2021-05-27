@@ -12,11 +12,13 @@ namespace CMS.Data.ModelEntity
     public partial class Advertising
     {
         [Key]
-        public int Id { get; set; }
+        [Column("Advertising_ID")]
+        public int AdvertisingId { get; set; }
+        [Column("AdvertisingBlock_ID")]
         public int? AdvertisingBlockId { get; set; }
         [StringLength(1000)]
         public string Title { get; set; }
-        [StringLength(200)]
+        [StringLength(50)]
         public string Image { get; set; }
         [StringLength(50)]
         public string Ext { get; set; }
@@ -35,13 +37,25 @@ namespace CMS.Data.ModelEntity
         public bool? IsCode { get; set; }
         public bool? Active { get; set; }
         public int? Counter { get; set; }
-        [StringLength(450)]
-        public string CreateBy { get; set; }
+        public Guid? CreateBy { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? CreateDate { get; set; }
-        [StringLength(450)]
-        public string LastEditBy { get; set; }
+        public Guid? LastEditBy { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? LastEditDate { get; set; }
+        public int? AdMostViewType { get; set; }
+        public int? AdMostViewCate { get; set; }
+        public int? AdMostViewChildCate { get; set; }
+        public int? AdMobileType { get; set; }
+        [StringLength(50)]
+        public string FormId { get; set; }
+        public int? ParameterId { get; set; }
+        public int? CategoryId { get; set; }
+        public int? ProductTypeId { get; set; }
+        public int? AdBlockDetailId { get; set; }
+
+        [ForeignKey(nameof(AdvertisingBlockId))]
+        [InverseProperty("Advertising")]
+        public virtual AdvertisingBlock AdvertisingBlock { get; set; }
     }
 }

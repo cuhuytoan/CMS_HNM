@@ -114,31 +114,7 @@ namespace CMS.Services.RepositoriesBase
 
         public async Task SendMail(string FromName, string ToEmail, string ToName, string Subject, string Body)
         {
-            var setting = await CmsContext.Setting.FirstOrDefaultAsync();
-
-            SmtpClient smtpClient = new();
-            smtpClient.Host = setting.EmailSenderSmtp;
-            smtpClient.Port = int.Parse(setting.EmailSenderPort);
-            smtpClient.EnableSsl = setting.EmailSenderSsl.Value;
-            smtpClient.UseDefaultCredentials = false;
-            smtpClient.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
-            smtpClient.Credentials = new NetworkCredential(setting.EmailSender, setting.EmailSenderPassword);
-            smtpClient.Timeout = 20000;
-
-            MailAddress FromAddress = new MailAddress(setting.EmailSender, FromName);
-            MailAddress ToAddress = new MailAddress(ToEmail, ToName);
-            MailMessage Mailer = new MailMessage(FromAddress, ToAddress);
-            Mailer.IsBodyHtml = true;
-            Mailer.BodyEncoding = System.Text.Encoding.UTF8;
-            Mailer.Subject = Subject;
-            Mailer.Body = Body;
-
-            try
-            {
-                smtpClient.Send(Mailer);
-            }
-            catch
-            { }
+            
         }
     }
 }

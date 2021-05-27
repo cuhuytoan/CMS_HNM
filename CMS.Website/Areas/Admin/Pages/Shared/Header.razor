@@ -35,57 +35,10 @@
             </form>
         </li>
     </ul>
-    <ul class="nav navbar-top-links navbar-right pull-right">
-        <li class="dropdown">
-            <a class="dropdown-toggle waves-effect waves-light font-20" data-toggle="dropdown" href="javascript:void(0);">
-                <i class="icon-speech"></i>
-                <span class="badge badge-xs badge-danger">@globalModel.totalUnread</span>
-            </a>
-            <ul class="dropdown-menu mailbox animated bounceInDown">
-                <li>
-                    <div class="drop-title">Bạn có @globalModel.totalUnread thông báo</div>
-                </li>
-                @if (globalModel.lstUserNoti == null)
-                {
-                    <li>
-                        <p><em>Loading...</em></p>
-                    </li>
-
-                }
-                else
-                {
-                    @foreach (var p in globalModel.lstUserNoti)
-                    {
-                        <li>
-                            <div class="message-center">
-                                <a href="@p.URL">
-                                    <div class="user-img">
-                                        <img src="/assets/images/logo.png" alt="user" class="img-circle">
-                                        <span class="profile-status online pull-right"></span>
-                                    </div>
-                                    <div class="mail-contnet">
-                                        <h5>@p.Subject</h5>
-                                        <span class="mail-desc">@((MarkupString)@p.Content)</span>
-                                        <span class="time">@CMS.Common.Utils.RenderTimeSince((DateTime)p.CreateDate)</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </li>
-                    }
-
-                }
-
-                <li>
-                    <a class="text-center" href="/Admin/Account/ListNotification">
-                        <strong>Xem tất cả</strong>
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                </li>
-            </ul>
-        </li>
+    <ul class="nav navbar-top-links navbar-right pull-right">      
         <li class="dropdown user-profile-header">
             <a href="javascript:void(0);" class="dropdown-toggle u-dropdown text-blue" style="display:flex;align-items:center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
-                <img src="/data/user/mainimages/small/@(String.IsNullOrEmpty(@globalModel.avatar) ? "noimages.png" : globalModel.avatar)" alt="user-img" class="img-circle">
+                <img src="/data/user/mainimages/small/noimages.png" : globalModel.avatar)" alt="user-img" class="img-circle">
                 @*<span class="d-none m-l-10"> @user.Identity.Name</span>*@
             </a>
             <ul class="dropdown-menu mailbox animated bounceInDown">

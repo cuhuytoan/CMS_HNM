@@ -11,23 +11,15 @@ namespace CMS.Data.ModelEntity
 {
     public partial class AspNetRoles
     {
-        public AspNetRoles()
-        {
-            AspNetRoleClaims = new HashSet<AspNetRoleClaims>();
-            AspNetUserRoles = new HashSet<AspNetUserRoles>();
-        }
-
         [Key]
+        [StringLength(128)]
         public string Id { get; set; }
+        [Required]
         [StringLength(256)]
         public string Name { get; set; }
-        [StringLength(256)]
-        public string NormalizedName { get; set; }
+        [StringLength(255)]
         public string ConcurrencyStamp { get; set; }
-
-        [InverseProperty("Role")]
-        public virtual ICollection<AspNetRoleClaims> AspNetRoleClaims { get; set; }
-        [InverseProperty("Role")]
-        public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
+        [StringLength(255)]
+        public string NormalizedName { get; set; }
     }
 }

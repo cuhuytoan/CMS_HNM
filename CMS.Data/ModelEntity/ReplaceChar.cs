@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CMS.Data.ModelEntity
 {
-    [Keyless]
     public partial class ReplaceChar
     {
+        [Key]
         [Column("ReplaceChar_ID")]
         public int ReplaceCharId { get; set; }
         [StringLength(5)]
