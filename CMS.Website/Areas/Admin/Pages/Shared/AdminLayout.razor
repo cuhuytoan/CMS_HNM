@@ -1,0 +1,38 @@
+﻿@inherits LayoutComponentBase
+
+@using Blazored.Toast.Configuration;
+
+
+<TelerikRootComponent>
+    <BlazoredToasts Position="ToastPosition.BottomRight"
+                    Timeout="10"
+                    IconType="IconType.FontAwesome"
+                    SuccessClass="success-toast-override"
+                    SuccessIcon="fa fa-thumbs-up"
+                    ErrorIcon="fa fa-bug"
+                    InfoIcon="fa fa-info"
+                    WarningIcon="fa fa-exclamation-triangle"
+                    ShowProgressBar="@true" />
+
+    <CascadingValue Value="hubConnection">
+        <CascadingValue Value="globalModel">
+            <div id="wrapper">
+                <nav class="navbar navbar-default navbar-static-top m-b-0">
+                    <Header />
+                </nav>
+                <aside class="sidebar" role="navigation">
+                    <LeftMenuLayout />
+                </aside>
+                <div class="page-wrapper">
+
+                    <div class="container-fluid">
+                        @Body
+
+                    </div>
+                </div>
+            </div>
+        </CascadingValue>
+    </CascadingValue>
+</TelerikRootComponent>
+
+
