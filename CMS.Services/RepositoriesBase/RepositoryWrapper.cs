@@ -12,13 +12,26 @@ namespace CMS.Services.RepositoriesBase
      
         private IAdvertisingRepository _advertisingRepository;
 
+        private IProductCategoryRepository _productCategoryRepository;
+
 
         public RepositoryWrapper(IDbContextFactory<CmsContext> CmsContext)
         {
             _cmsContext = CmsContext;
         }
 
+        public IProductCategoryRepository ProductCategory
+        {
+            get
+            {
+                if (_productCategoryRepository == null)
+                {
+                    _productCategoryRepository = new ProductCategoryRepository(_cmsContext.CreateDbContext());
+                }
 
+                return _productCategoryRepository;
+            }
+        }
 
         public IAccountRepository AspNetUsers
         {

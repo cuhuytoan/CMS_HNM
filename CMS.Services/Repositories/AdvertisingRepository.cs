@@ -15,7 +15,10 @@ namespace CMS.Services.Repositories
 {
     public interface IAdvertisingRepository : IRepositoryBase<Advertising>
     {
-       
+        Task<List<AdvertisingBlock>> AdvertisingBlocksGetAll();
+
+        Task<List<AdvertisingBlockDetail>> AdvertisingBlockDetailsGetByBlockId(int adBlockId);
+        
     }
 
     public class AdvertisingRepository : RepositoryBase<Advertising>, IAdvertisingRepository
@@ -24,6 +27,32 @@ namespace CMS.Services.Repositories
         {
         }
 
-       
+        public async Task<List<AdvertisingBlockDetail>> AdvertisingBlockDetailsGetByBlockId(int adBlockId)
+        {
+            List<AdvertisingBlockDetail> lstOutPut = new();
+            try
+            {
+                lstOutPut = await CmsContext.AdvertisingBlockDetail.Where(x => x.AdBlockId == adBlockId).ToListAsync();
+            }
+            catch
+            {
+
+            }
+            return lstOutPut;
+        }
+
+        public async Task<List<AdvertisingBlock>> AdvertisingBlocksGetAll()
+        {
+            List<AdvertisingBlock> lstOutPut = new();
+            try
+            {
+                lstOutPut = await CmsContext.AdvertisingBlock.Where(x => x.AdvertisingBlockId >= 20).ToListAsync();
+            }
+            catch
+            {
+
+            }
+            return lstOutPut;
+        }
     }
 }

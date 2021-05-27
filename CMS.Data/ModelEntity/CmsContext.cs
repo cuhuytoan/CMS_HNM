@@ -9,6 +9,10 @@ namespace CMS.Data.ModelEntity
 {
     public partial class CmsContext : DbContext
     {
+        public CmsContext()
+        {
+        }
+
         public CmsContext(DbContextOptions<CmsContext> options)
             : base(options)
         {
@@ -25,6 +29,7 @@ namespace CMS.Data.ModelEntity
         public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<ProductCategory> ProductCategory { get; set; }
         public virtual DbSet<ReplaceChar> ReplaceChar { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
