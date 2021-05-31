@@ -18,6 +18,8 @@ namespace CMS.Services.Repositories
         Task<List<AdvertisingBlock>> AdvertisingBlocksGetAll();
 
         Task<List<AdvertisingBlockDetail>> AdvertisingBlockDetailsGetByBlockId(int adBlockId);
+
+        
         
     }
 

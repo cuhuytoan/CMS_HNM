@@ -9,10 +9,7 @@ namespace CMS.Data.ModelEntity
 {
     public partial class CmsContext : DbContext
     {
-        public CmsContext()
-        {
-        }
-
+      
         public CmsContext(DbContextOptions<CmsContext> options)
             : base(options)
         {

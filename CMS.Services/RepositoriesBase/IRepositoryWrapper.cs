@@ -9,6 +9,7 @@ namespace CMS.Services.RepositoriesBase
     
         IAdvertisingRepository Advertising { get; }
       
+        IProductCategoryRepository ProductCategory { get; }
 
         void Save();
 

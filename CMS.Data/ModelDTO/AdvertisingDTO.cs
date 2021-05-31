@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CMS.Data.ModelDTO
 {
-    class AdvertisingDTO
+    public class AdvertisingDTO
     {
     }
 }
