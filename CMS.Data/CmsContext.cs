@@ -5,10 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace CMS.Data.ModelEntity
+namespace CMS.Data
 {
     public partial class CmsContext : DbContext
     {
+      
         public CmsContext(DbContextOptions<CmsContext> options)
             : base(options)
         {
